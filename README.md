@@ -1,5 +1,14 @@
+## Event Portal
+A simple, real-time event information portal written using the Meteor framework. Perfect for student hackathons and similar events. Current features include:
+
+* Real-time twitter wall displaying tweets with the event hashtag
+* Twitter leaderboard - list of users who are tweeting the most about the event. Great for twitter competitions and encouraging social media participation
+* Sidebar which can be configured to display links to Facebook, Twitter, Github and DevPost
+
+![Screenshot](/Screenshot.png "Screenshot")
+
 ## Configuration
-The app can be configured via a settings file, which should have a structure similar to the following example:
+A settings file is needed before the portal can be successfully deployed. All required settings can be included in **settings.json**, and saved to the repository root. Refer to the following example:
 
 ```
 {
@@ -33,4 +42,8 @@ The app can be configured via a settings file, which should have a structure sim
 ```
 
 The **logo_path** parameter should be the path relative to the public folder. Twitter API keys are required to use the
-twitter streaming service.
+twitter streaming service. To launch the portal locally, run the following in the project root:
+
+```
+meteor --settings settings.json
+```
