@@ -1,0 +1,61 @@
+<template name="MapLayout">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2">
+        <img src="{{ event.logo_path }}" alt="{{ event.name }}" class="img img-responsive"/>
+        <hr/>
+      </div>
+      <div class="col-md-6 col-md-offset-1">
+        <h1>{{ hashtag }}</h1>
+        <hr/>
+        {{> tweets }}
+      </div>
+      <div class="col-md-3">
+        <h1>Leaderboard</h1>
+        <hr/>
+        {{> scoreboard }}
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="tweets">
+  <ul class="media-list">
+    {{# each tweets }}
+      <li class="media">
+        {{# with user }}
+          <div class="media-left">
+            <img src="{{profile_image_url}}" alt="" class="media-object img-rounded"/>
+          </div>
+        {{/with}}
+        <div class="media-body">
+          {{# with user }}
+            <h4 class="media-heading"><strong>{{ name }}</strong> - @{{ screen_name }}</h4>
+          {{/ with}}
+          <p class="lead">{{ text }}</p>
+          {{#if entities.media }}
+            {{# each entities.media }}
+              <img class="img img-responsive" src="{{ media_url }}" alt=""/>
+            {{/each}}
+          {{/if}}
+        </div>
+      </li>
+    {{/ each }}
+  </ul>
+</template>
+
+<template name="scoreboard">
+  <ul class="media-list">
+    {{# each users }}
+      <li class="media">
+        <div class="media-left">
+          <img src="{{profile_image_url}}" alt="" class="media-object img img-rounded"/>
+        </div>
+        <div class="media-body">
+          <h4 class="media-heading"><strong>{{ name }}</strong> - @{{ screen_name }}</h4>
+          <p class="lead">{{ score }} tweets</p>
+        </div>
+      </li>
+    {{/ each }}
+  </ul>
+</template>
