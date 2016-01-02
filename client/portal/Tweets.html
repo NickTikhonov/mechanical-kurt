@@ -1,0 +1,24 @@
+<template name="Tweets">
+  <ul class="media-list">
+    {{# each tweets }}
+      <li class="media">
+        {{# with user }}
+          <div class="media-left">
+            <img src="{{profile_image_url}}" alt="" class="media-object img-rounded"/>
+          </div>
+        {{/with}}
+        <div class="media-body">
+          {{# with user }}
+            <h4 class="media-heading"><strong>{{ name }}</strong> - @{{ screen_name }}</h4>
+          {{/ with}}
+          <p class="lead">{{ text }}</p>
+          {{#if entities.media }}
+            {{# each entities.media }}
+              <img class="img img-responsive" src="{{ media_url }}" alt=""/>
+            {{/each}}
+          {{/if}}
+        </div>
+      </li>
+    {{/ each }}
+  </ul>
+</template>

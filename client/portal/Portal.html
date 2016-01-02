@@ -1,0 +1,36 @@
+<template name="Portal">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2">
+        <img src="{{ event.logo_path }}" alt="{{ event.name }}" class="img img-responsive"/>
+        <hr/>
+        <p>{{ event.description }}</p>
+        <hr/>
+        <ul class="list-group">
+          {{# if links.twitter }}
+            <li class="list-group-item"><a href="{{ links.twitter }}" class=""><i class="fa fa-twitter"></i> Twitter</a></li>
+          {{/ if}}
+          {{# if links.facebook}}
+            <li class="list-group-item"><a href="{{ links.facebook }}"><i class="fa fa-facebook"></i> Facebook</a></li>
+          {{/ if}}
+          {{# if links.devpost}}
+            <li class="list-group-item"><a href="{{ links.devpost }}"><i class="fa fa-upload"></i> DevPost</a></li>
+          {{/ if}}
+          {{# if links.github}}
+            <li class="list-group-item"><a href="{{ links.github }}" class=""><i class="fa fa-github"></i> Github</a></li>
+          {{/ if}}
+        </ul>
+      </div>
+      <div class="col-md-6 col-md-offset-1">
+        <h1>{{ hashtag }}</h1>
+        <hr/>
+        {{> Tweets }}
+      </div>
+      <div class="col-md-3">
+        <h1>Leaderboard</h1>
+        <hr/>
+        {{> Leaderboard }}
+      </div>
+    </div>
+  </div>
+</template>

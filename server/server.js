@@ -32,7 +32,7 @@ Meteor.publish("tweets", function() {
   });
 });
 
-Meteor.publish("tweeters", function() {
+Meteor.publish("leaderboard", function() {
   return Tweeters.find({}, {
     sort: {
       score: -1
