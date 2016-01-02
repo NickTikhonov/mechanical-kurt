@@ -6,7 +6,14 @@ The app can be configured via a settings file, which should have a structure sim
   "public": {
     "event": {
       "name": "YourEventName",
-      "logo_path": "logo.png"
+      "logo_path": "logo.png",
+      "description": "YourEventDescription"
+    },
+    "links": {
+      "github": "github.com",
+      "facebook": "facebook.com",
+      "twitter": "twitter.com",
+      "devpost": "devpost.com"
     },
     "twitter": {
       "hashtag": "#YourEventTag",

@@ -4,6 +4,9 @@ Template.MapLayout.helpers({
   },
   'event': function() {
     return Meteor.settings.public.event;
+  },
+  'links': function() {
+    return Meteor.settings.public.links;
   }
 });
 
