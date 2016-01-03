@@ -27,7 +27,10 @@ A settings file is needed before the portal can be successfully deployed. All re
     "twitter": {
       "hashtag": "#YourEventTag",
       "num_tweets": 20,
-      "num_users": 5
+      "num_users": 5,
+      "leaderboard_blacklist": [
+        "user1", "user2"
+      ]
     }
   },
   "private": {
@@ -42,7 +45,8 @@ A settings file is needed before the portal can be successfully deployed. All re
 ```
 
 The **logo_path** parameter should be the path relative to the public folder. Twitter API keys are required to use the
-twitter streaming service. To launch the portal locally, run the following in the project root:
+twitter streaming service. **leaderboard_blacklist** should contain twitter usernames excluded from the leaderboard.
+To launch the portal locally, run the following in the project root:
 
 ```
 meteor --settings settings.json

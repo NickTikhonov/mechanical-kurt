@@ -1,12 +1,17 @@
 Meteor.startup(function() {
   Tweets.remove({});
+  Tweeters.remove({});
 
   Twit = new TwitMaker(Meteor.settings.private.twitter_auth);
 
   var stream = Twit.stream("statuses/filter", {
     track: Meteor.settings.public.twitter.hashtag
   }).on("tweet", Meteor.bindEnvironment(function(tweet) {
-    if (!tweet.retweeted_status) {
+    if (
+        !tweet.retweeted_status &&
+        Meteor.settings.public.twitter.leaderboard_blacklist
+          .indexOf(tweet.user.screen_name) == -1
+    ) {
       tweet.created_at = new Date().getTime();
       console.log(JSON.stringify(tweet));
       Tweets.insert(tweet);
