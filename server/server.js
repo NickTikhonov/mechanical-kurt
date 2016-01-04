@@ -1,3 +1,26 @@
+function incrementUserScore(tweet) {
+  if (!Tweeters.findOne({id: tweet.user.id})) {
+    tweet.user.score = 1;
+    Tweeters.insert(tweet.user);
+  } else {
+    Tweeters.update({id: tweet.user.id}, {$inc: {score: 1}});
+  }
+}
+
+function validTweet(tweet) {
+  return !isFromBlacklistedUser(tweet) &&
+      !isRetweet(tweet);
+}
+
+function isFromBlacklistedUser(tweet) {
+  return Meteor.settings.public.twitter.leaderboard_blacklist
+    .indexOf(tweet.user.screen_name) !== -1;
+}
+
+function isRetweet(tweet) {
+  return tweet.retweeted_status !== undefined;
+}
+
 Meteor.startup(function() {
   Tweets.remove({});
   Tweeters.remove({});
@@ -7,19 +30,9 @@ Meteor.startup(function() {
   var stream = Twit.stream("statuses/filter", {
     track: Meteor.settings.public.twitter.hashtag
   }).on("tweet", Meteor.bindEnvironment(function(tweet) {
-    if (
-        !tweet.retweeted_status &&
-        Meteor.settings.public.twitter.leaderboard_blacklist
-          .indexOf(tweet.user.screen_name) == -1
-    ) {
+    if (validTweet(tweet)) {
       Tweets.insert(tweet);
-
-      if (!Tweeters.findOne({id: tweet.user.id})) {
-        tweet.user.score = 1;
-        Tweeters.insert(tweet.user);
-      } else {
-        Tweeters.update({id: tweet.user.id}, {$inc: {score: 1}});
-      }
+      incrementUserScore(tweet);
     }
   }));
 });
