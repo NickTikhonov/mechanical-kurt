@@ -12,8 +12,6 @@ Meteor.startup(function() {
         Meteor.settings.public.twitter.leaderboard_blacklist
           .indexOf(tweet.user.screen_name) == -1
     ) {
-      tweet.created_at = new Date().getTime();
-      console.log(JSON.stringify(tweet));
       Tweets.insert(tweet);
 
       if (!Tweeters.findOne({id: tweet.user.id})) {

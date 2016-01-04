@@ -1,2 +1,7 @@
-Tweets = new Meteor.Collection("tweets");
-Tweeters = new Meteor.Collection("tweeters");
+Tweets = new Mongo.Collection("tweets");
+
+Tweets.before.insert(function(userId, doc) {
+  doc.created_at = new Date().getTime();
+});
+
+Tweeters = new Mongo.Collection("tweeters");
