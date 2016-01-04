@@ -1,3 +1,10 @@
+/**
+ * Increments the 'score' parameter for the author of the tweet.
+ * If author does not exist in the database, a new entry is added
+ * with score of 1
+ *
+ * @param tweet object from the streaming api
+ */
 function incrementUserScore(tweet) {
   if (!Tweeters.findOne({id: tweet.user.id})) {
     tweet.user.score = 1;
@@ -7,6 +14,13 @@ function incrementUserScore(tweet) {
   }
 }
 
+/**
+ * Top-level logic for determining whether a tweet
+ * should be displayed to connected clients.
+ *
+ * @param tweet object from the streaming api
+ * @returns whether the tweet should be displayed to connected clients
+ */
 function validTweet(tweet) {
   return !isFromBlacklistedUser(tweet) &&
       !isRetweet(tweet);
@@ -37,10 +51,11 @@ Meteor.startup(function() {
   }));
 });
 
+/**
+ * Stream of the latest tweets, limited by the "num_tweets" parameter.
+ */
 Meteor.publish("tweets", function() {
-  return Tweets.find({
-
-  }, {
+  return Tweets.find({}, {
     sort: {
       created_at: -1
     },
@@ -48,6 +63,9 @@ Meteor.publish("tweets", function() {
   });
 });
 
+/**
+ * Stream of users who have tweeted the most with the hashtag.
+ */
 Meteor.publish("leaderboard", function() {
   return Tweeters.find({}, {
     sort: {
