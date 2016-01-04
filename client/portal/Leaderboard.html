@@ -1,15 +1,24 @@
 <template name="Leaderboard">
-  <ul class="media-list">
-    {{# each users }}
-      <li class="media">
-        <div class="media-left">
-          <img src="{{profile_image_url}}" alt="" class="media-object img img-rounded"/>
-        </div>
-        <div class="media-body">
-          <h4 class="media-heading"><strong>{{ name }}</strong> - @{{ screen_name }}</h4>
-          <p class="lead">{{ score }} tweets</p>
-        </div>
-      </li>
+  {{# each top }}
+    <div class="media">
+      <div class="media-left">
+        <img src="{{profile_image_url}}" alt="" class="media-object img img-rounded"/>
+      </div>
+      <div class="media-body">
+        <h4 class="media-heading">#{{ increment @index }}: <strong>{{ name }}</strong></h4>
+        <h5 class="media-heading">@{{ screen_name }}</h5>
+        <p>{{ score }} tweets</p>
+      </div>
+    </div>
+  {{/ each }}
+
+  <hr/>
+
+  <div class="row">
+    {{# each others }}
+      <div class="col-md-3">
+        <img src="{{profile_image_url}}" alt="" class="img img-rounded center-block"/>
+      </div>
     {{/ each }}
-  </ul>
+  </div>
 </template>

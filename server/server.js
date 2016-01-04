@@ -37,7 +37,6 @@ function isRetweet(tweet) {
 
 Meteor.startup(function() {
   Tweets.remove({});
-  Tweeters.remove({});
 
   Twit = new TwitMaker(Meteor.settings.private.twitter_auth);
 
