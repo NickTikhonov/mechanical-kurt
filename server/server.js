@@ -14,6 +14,16 @@ function incrementUserScore(tweet) {
   }
 }
 
+function userIsAdmin() {
+  if (!this.userId) return false;
+
+  var adminEmails = Meteor.settings.private.access.admins;
+  var user = Meteor.users.findOne(this.userId);
+  var userEmail = user.emails[0].address;
+
+  return adminEmails.indexOf(userEmail) !== -1;
+}
+
 /**
  * Top-level logic for determining whether a tweet
  * should be displayed to connected clients.
@@ -62,6 +72,10 @@ Meteor.publish("tweets", function() {
   });
 });
 
+Meteor.publish("all-tweets", function() {
+  return Tweets.find({});
+});
+
 /**
  * Stream of users who have tweeted the most with the hashtag.
  */
@@ -72,4 +86,9 @@ Meteor.publish("leaderboard", function() {
     },
     limit: Meteor.settings.public.twitter.num_users
   });
+});
+
+
+Meteor.publish("all-tweeters", function() {
+  return Tweeters.find({});
 });

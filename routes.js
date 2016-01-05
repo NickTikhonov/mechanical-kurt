@@ -4,3 +4,10 @@ FlowRouter.route('/', {
     BlazeLayout.render('Portal');
   }
 });
+
+FlowRouter.route('/admin', {
+  name: 'map',
+  action: function() {
+    BlazeLayout.render('Dashboard');
+  }
+});

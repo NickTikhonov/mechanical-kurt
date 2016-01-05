@@ -39,6 +39,9 @@ A settings file is needed before the portal can be successfully deployed. All re
       "consumer_secret": "SECRET_GOES_HERE",
       "access_token":	"TOKEN_GOES_HERE",
       "access_token_secret": "TOKEN_SECRET_GOES_HERE"
+    },
+    "access": {
+      "admins": ["nt34@st-andrews.ac.uk"]
     }
   }
 }
