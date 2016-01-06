@@ -32,7 +32,6 @@ email@1.0.8
 es5-shim@4.1.14
 fastclick@1.0.7
 fortawesome:fontawesome@4.5.0
-fourseven:scss@3.4.1
 geojson-utils@1.0.4
 gwendall:body-events@0.1.6
 hot-code-push@1.0.0
@@ -49,6 +48,7 @@ less@2.5.1
 livedata@1.0.15
 localstorage@1.0.5
 logging@1.0.8
+maazalik:highcharts@0.4.0
 matb33:collection-hooks@0.8.1
 meteor@1.1.10
 meteor-base@1.0.1
@@ -67,7 +67,6 @@ meteortoys:status@2.1.0
 meteortoys:sub@2.1.0
 meteortoys:throttle@2.1.0
 meteortoys:toykit@2.2.1
-mfpierre:chartist-js@1.6.1
 minifiers@1.1.7
 minimongo@1.0.10
 mizzao:bootstrap-3@3.3.1_1

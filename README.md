@@ -1,4 +1,4 @@
-## Event Portal
+## MechanicalKurt
 A simple, real-time event information portal written using the Meteor framework. Perfect for student hackathons and similar events. Current features include:
 
 * Real-time twitter wall displaying tweets with the event hashtag
@@ -6,6 +6,7 @@ A simple, real-time event information portal written using the Meteor framework.
 * Sidebar which can be configured to display links to Facebook, Twitter, Github and DevPost
 
 ![Screenshot](/Screenshot.png "Screenshot")
+![Screenshot](/AdminScreenshot.png "Admin Panel")
 
 ## Configuration
 A settings file is needed before the portal can be successfully deployed. All required settings can be included in **settings.json**, and saved to the repository root. Refer to the following example:

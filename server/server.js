@@ -47,6 +47,7 @@ function isRetweet(tweet) {
 
 Meteor.startup(function() {
   Tweets.remove({});
+  Tweeters.remove({});
 
   Twit = new TwitMaker(Meteor.settings.private.twitter_auth);
 
@@ -72,10 +73,6 @@ Meteor.publish("tweets", function() {
   });
 });
 
-Meteor.publish("all-tweets", function() {
-  return Tweets.find({});
-});
-
 /**
  * Stream of users who have tweeted the most with the hashtag.
  */
@@ -88,7 +85,52 @@ Meteor.publish("leaderboard", function() {
   });
 });
 
+Meteor.publish("all-tweets", function() {
+  return Tweets.find({});
+});
 
 Meteor.publish("all-tweeters", function() {
   return Tweeters.find({});
+});
+
+Meteor.publish("tweetStats", function() {
+  var sub = this;
+  var db = MongoInternals.defaultRemoteCollectionDriver().mongo.db;
+
+  var pipeline = [
+    {
+      "$group":{
+        "_id": {
+          "year": {"$year": "$created_at"},
+          "month":{"$month": "$created_at"},
+          "day":{"$dayOfMonth": "$created_at"},
+          "hour":{"$hour": "$created_at"},
+          "minute": {"$minute": "$created_at"}
+        },
+        "count":{ "$sum": 1}
+      }
+    }
+  ];
+
+  db.collection("tweets").aggregate(
+    pipeline,
+    // Need to wrap the callback so it gets called in a Fiber.
+    Meteor.bindEnvironment(
+      function(err, result) {
+        // Add each of the results to the subscription.
+        _.each(result, function(e) {
+          // Generate a random disposable id for aggregated documents
+          console.log(e);
+          sub.added("tweetstats", Random.id(), {
+            "date": e._id,
+            "count": e.count,
+          });
+        });
+        sub.ready();
+      },
+      function(error) {
+        Meteor._debug( "Error doing aggregation: " + error);
+      }
+    )
+  );
 });
