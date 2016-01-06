@@ -5,7 +5,10 @@ A simple, real-time event information portal written using the Meteor framework.
 * Twitter leaderboard - list of users who are tweeting the most about the event. Great for twitter competitions and encouraging social media participation
 * Sidebar which can be configured to display links to Facebook, Twitter, Github and DevPost
 
+### Twitter Wall
 ![Screenshot](/Screenshot.png "Screenshot")
+
+### Admin Panel / Insights
 ![Screenshot](/AdminScreenshot.png "Admin Panel")
 
 ## Configuration
