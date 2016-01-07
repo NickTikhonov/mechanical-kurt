@@ -1,16 +1,18 @@
 Template.HourChart.onCreated(function() {
-  this.subscribe("tweetStats");
+  Meteor.autorun(function() {
+    Meteor.subscribe("tweetStats");
+  });
 });
 
 Template.HourChart.helpers({
   'chartData': function() {
     var allData = TweetStats.find({}, {sort: {
-      "date.year": 1,
-      "date.month": 1,
-      "date.day": 1,
-      "date.hour": 1,
-      "date.minute": 1
-    }}).fetch();
+      "date.year": -1,
+      "date.month": -1,
+      "date.day": -1,
+      "date.hour": -1,
+      "date.minute": -1
+    }, limit: 60}).fetch().reverse();
     var labels = allData.map(function (hour) {
       return hour.date.hour + ":" + hour.date.minute + " pm"
     });
