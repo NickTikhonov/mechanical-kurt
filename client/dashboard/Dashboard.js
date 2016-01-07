@@ -12,5 +12,27 @@ Template.Dashboard.helpers({
   },
   'averageTweets': function() {
     return (Tweets.find({}).count() / Tweeters.find({}).count()).toFixed(2);
+  },
+  'stats': function() {
+    return [
+      {
+        panelClass: "panel-primary",
+        iconClass: "fa-twitter",
+        value: Tweets.find({}).count(),
+        description: "Total Tweets"
+      },
+      {
+        panelClass: "panel-green",
+        iconClass: "fa-user",
+        value: Tweeters.find({}).count(),
+        description: "Users Engaged"
+      },
+      {
+        panelClass: "panel-yellow",
+        iconClass: "fa-tachometer",
+        value: (Tweets.find({}).count() / Tweeters.find({}).count()).toFixed(2),
+        description: "Avg. Tweets per Person"
+      }
+    ]
   }
 });

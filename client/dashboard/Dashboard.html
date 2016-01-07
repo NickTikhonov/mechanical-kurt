@@ -1,74 +1,14 @@
 <template name="Dashboard">
   <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>SB Admin - Bootstrap Admin Template</title>
-
-    <!-- Custom CSS -->
     <link href="css/sb-admin.css" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
   </head>
 
   <body>
   <div class="container">
     <div class="row">
-      <div class="col-md-4">
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <div class="row">
-              <div class="col-xs-3">
-                <i class="fa fa-twitter fa-5x"></i>
-              </div>
-              <div class="col-xs-9 text-right">
-                <div class="huge">{{ tweetCount }}</div>
-                <div>Total Tweets</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="panel panel-green">
-          <div class="panel-heading">
-            <div class="row">
-              <div class="col-xs-3">
-                <i class="fa fa-user fa-5x"></i>
-              </div>
-              <div class="col-xs-9 text-right">
-                <div class="huge">{{ tweeterCount }}</div>
-                <div>Users Engaged</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="panel panel-yellow">
-          <div class="panel-heading">
-            <div class="row">
-              <div class="col-xs-3">
-                <i class="fa fa-tachometer fa-5x"></i>
-              </div>
-              <div class="col-xs-9 text-right">
-                <div class="huge">{{ averageTweets }}</div>
-                <div>Avg. Tweets per Person</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      {{# each stats }}
+        {{> StatBox }}
+      {{/ each }}
     </div>
     <!-- /.row -->
     <div class="row">
