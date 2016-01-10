@@ -93,7 +93,7 @@ Meteor.publish("all-tweeters", function() {
   return Tweeters.find({});
 });
 
-Meteor.publish("tweetStats", function() {
+Meteor.publish("minuteStats", function() {
   var sub = this;
   var db = MongoInternals.defaultRemoteCollectionDriver().mongo.db;
 
@@ -121,7 +121,48 @@ Meteor.publish("tweetStats", function() {
         _.each(result, function(e) {
           // Generate a random disposable id for aggregated documents
           console.log(e);
-          sub.added("tweetstats", Random.id(), {
+          sub.added("minutestats", Random.id(), {
+            "date": e._id,
+            "count": e.count,
+          });
+        });
+        sub.ready();
+      },
+      function(error) {
+        Meteor._debug( "Error doing aggregation: " + error);
+      }
+    )
+  );
+});
+
+Meteor.publish("hourStats", function() {
+  var sub = this;
+  var db = MongoInternals.defaultRemoteCollectionDriver().mongo.db;
+
+  var pipeline = [
+    {
+      "$group":{
+        "_id": {
+          "year": {"$year": "$created_at"},
+          "month":{"$month": "$created_at"},
+          "day":{"$dayOfMonth": "$created_at"},
+          "hour":{"$hour": "$created_at"}
+        },
+        "count":{ "$sum": 1}
+      }
+    }
+  ];
+
+  db.collection("tweets").aggregate(
+    pipeline,
+    // Need to wrap the callback so it gets called in a Fiber.
+    Meteor.bindEnvironment(
+      function(err, result) {
+        // Add each of the results to the subscription.
+        _.each(result, function(e) {
+          // Generate a random disposable id for aggregated documents
+          console.log(e);
+          sub.added("hourstats", Random.id(), {
             "date": e._id,
             "count": e.count,
           });

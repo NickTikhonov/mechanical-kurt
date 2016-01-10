@@ -1,5 +1,6 @@
 Tweets = new Mongo.Collection("tweets");
-TweetStats = new Mongo.Collection("tweetstats");
+HourStats = new Mongo.Collection("hourstats");
+MinuteStats = new Mongo.Collection("minutestats");
 
 Tweets.before.insert(function(userId, doc) {
   doc.created_at = new Date();

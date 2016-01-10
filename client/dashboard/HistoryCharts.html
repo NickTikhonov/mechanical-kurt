@@ -1,0 +1,10 @@
+<template name="HistoryCharts">
+  <div class="row">
+    <div class="col-lg-6">
+      {{> highchartsHelper chartId="minute_chart" chartWidth="100%" charHeight="600px" chartObject=minuteData}}
+    </div>
+    <div class="col-lg-6">
+      {{> highchartsHelper chartId="hour_chart" chartWidth="100%" charHeight="600px" chartObject=hourData}}
+    </div>
+  </div>
+</template>
